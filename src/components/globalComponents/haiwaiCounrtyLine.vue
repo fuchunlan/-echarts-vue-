@@ -238,11 +238,6 @@ export default {
     // 改变表格
     changeChart() {
       this.isShow24 = !this.isShow24
-      // if (this.isShow24) { //显示的为24小时新增
-      //
-      // } else { //显示的的为海外多国累计趋势
-      //
-      // }
       this.handleChartData()
       this.initChart5()
     },
@@ -269,31 +264,19 @@ export default {
     },
     // 比较函数
     createComparisonFunction(propertyName) {
-
       return function (object1, object2) {
-
         var value1 = object1[propertyName];
-
         var value2 = object2[propertyName];
-
         if (value1 < value2) {
-
           return 1;
-
         } else if (value1 > value2) {
-
           return -1;
-
         } else {
-
           return 0;
-
         }
-
       }
-
-
     }
+
   }
 }
 

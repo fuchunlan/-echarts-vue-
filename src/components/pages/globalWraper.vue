@@ -62,9 +62,7 @@
                 <div class="th">累计确诊</div>
                 <div class="th">治愈</div>
                 <div class="th">死亡</div>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -83,7 +81,6 @@
               <div class="th">累计确诊</div>
               <div class="th">治愈</div>
               <div class="th">死亡</div>
-
             </div>
           </div>
           <div class="tbody" v-for="(country,index) in foreignList" :key="index">
@@ -95,7 +92,6 @@
               <div class="td">{{ country.confirm }}</div>
               <div class="td">{{ country.heal }}</div>
               <div class="td">{{ country.dead }}</div>
-
             </div>
           </div>
         </div>
@@ -133,8 +129,8 @@ export default {
     this.$axios.get('/nosymapi/automation/foreign/country/ranklist')
       .then(res => {
         this.foreignList = res.data.data
-
       })
+    // 连接接口并处理初始化地图所需数据
     this.$axios.get('/wyapi/wuhan/app/data/list-total')
       .then(res => {
         let foreignList2 = res.data.data.areaTree
@@ -171,8 +167,6 @@ export default {
           this.initChartForMap()
         })
       })
-
-
   },
   methods:{
     initChartForMap() {
@@ -298,7 +292,6 @@ export default {
     }
   },
   components:{
-
     haiwaiCounrtyLine,
     mainlyCountryLine
   }
@@ -436,7 +429,7 @@ export default {
 .foreignListWraper .table .td:nth-child(3),
 .foreignListWraper .table .th:nth-child(2),
 .foreignListWraper .table .th:nth-child(3) {
-  width: 17vw;
+  width: 18vw;
 }
 .foreignListWraper .table .th:nth-child(3) {
   background-color: #fdeeee;

@@ -263,6 +263,7 @@ import 'echarts/map/js/province/qinghai'
 import 'echarts/map/js/province/shandong'
 import 'echarts/map/js/province/shanghai'
 import 'echarts/map/js/province/shanxi1'
+import 'echarts/map/js/province/shanxi'
 import 'echarts/map/js/province/sichuan'
 import 'echarts/map/js/province/taiwan'
 import 'echarts/map/js/province/tianjin'
@@ -361,21 +362,14 @@ export default{
         chmap.resize()
       })
       let option = {
-
-        tooltip: {
-          trigger: 'item',
+        tooltip: { // 提示框组件
+          trigger: 'item',textStyle:{fontSize:'14'},
           formatter: '{b}<br/>'+this.formatter+'{c} ',
-          textStyle:{
-            fontSize:'14',
-          }
         },
-        toolbox:{
-          show:true,
-          feature:{
-            restore:{},
-          }
+        toolbox:{ // 工具栏
+          show:true, feature:{restore:{},}
         },
-        visualMap: {
+        visualMap: { // 视觉映射组件
           type: 'piecewise',
           pieces: [
             {min: 10000, max: 100000, label: '10000人及以上', color: '#7F1100'},
@@ -386,17 +380,13 @@ export default{
             {min: 1, max: 9, label: '1-9人', color: '#FFF2CF'},
             {min: 0, max: 0, label: '0人', color: '#FFFFFF'},
           ],
-          textStyle:{
-            fontSize:10
-          },
+          textStyle:{fontSize:10},
           itemGap:1,
         },
-        grid:{
-          bottom:0,
-          top:0,
-          containLabel: true // 包含
+        grid:{ // 直角坐标系内绘图网格
+          bottom:0, top:0, containLabel: true // 包含
         },
-        series: [
+        series: [ // 系列列表
           {
             name: '确诊数',
             type: 'map',
@@ -549,6 +539,7 @@ export default{
     }
   },
   mounted(){
+    // 获取后台接口
     this.$axios({
       method:'get',
       url:'/api/getOnsInfo?name=disease_h5'
@@ -1020,7 +1011,7 @@ export default{
   position: relative;
   border-right: 1px solid #fff;
 }
-#chinaListWraper .table:last-child .tbody:first-child .confirmId p:last-child{
+#chinaListWraper .table:last-child .tbody .confirmId p:last-child{
   margin:  0 -1rem;
 }
 #chinaListWraper .table .td:first-child,

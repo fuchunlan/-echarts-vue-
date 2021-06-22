@@ -27,7 +27,7 @@
     <div class="content">
       <!--headView-->
       <div id="head">
-        <p class="head-logo"></p>
+        <p class="head-logo">Fcl</p>
         <div class="head-title">
           <p>新型冠状病毒肺炎</p>
           <p>疫情实时追踪</p>
@@ -135,12 +135,12 @@ export default {
     },
 
     closeArea() {
-
       if(this.isShowArea) {
         console.log('2222')
         this.isShowArea = false
       }
     },
+    // 切换标签
     changeTab(id){
       if (id == 1) {
         this.activeName = 'first'
@@ -215,7 +215,14 @@ export default {
 </script>
 
 <style>
-
+.head-logo{
+  z-index: 999;
+  font-size: 20px;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
 html::-webkit-scrollbar {
   width: 4px;
 }
@@ -241,6 +248,7 @@ html::-webkit-scrollbar-track {
   max-width: 752px;
   margin: 0 auto;
   border: 1px solid #E2E9F3;
+  box-shadow: 1px 0px 16px #e2e9f3;
   box-sizing: border-box;
 }
 .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title{
@@ -288,6 +296,7 @@ html::-webkit-scrollbar-track {
   height: 10rem;
   background: url("https://mat1.gtimg.com/news/feiyanarea/head_bg_new.png") top;
   background-size: cover;
+  box-shadow: 1px 0px 16px #e2e9f3;
 }
 .head-title{
   position: relative;
@@ -350,6 +359,7 @@ html::-webkit-scrollbar-track {
 }
 .el-tabs__content{
   border: 1px solid #E2E9F3;
+  box-shadow: 1px 0px 16px #e2e9f3;
 }
 .el-tabs--card>.el-tabs__header{
   margin: 0 ;

@@ -113,61 +113,32 @@ export default{
       initChart(){
         let chartNoSymptom = this.$echarts.init(this.$refs.chartNoSymptom)
         window.addEventListener('resize',function (){
-          chartNoSymptom.resize()
+          chartNoSymptom.resize() //监视屏幕变动,自动重绘
         })
         let option = {
           title: { // 标题
-            text: this.title,
-            textStyle:{
-              fontWeight:600,
-            }
+            text: this.title, textStyle:{fontWeight:600,}
           },
-          tooltip:{// 鼠标点击或悬浮图表,展示的描述
-            show:true
-          },
+          tooltip:{show:true},
           grid:{ // canvas的布局
-            left:'12%',
-            right:0,
+            left:'12%', right:0,
           },
           xAxis: { // x轴
-            type: 'category',
-            nameRotate:'180deg',
-            axisTick:{
-              show:false
-            },
-            axisLabel:{
-              rotate:45,
-              margin:20,
-            },
-            data: this.xData //x轴数据
+            type: 'category', nameRotate:'180deg', axisTick:{show:false},
+            axisLabel:{rotate:45, margin:20,}, data: this.xData //x轴数据
           },
-          yAxis: {
-            axisLine:{
-              show:false
-            },
-            axisTick:{
-              show:false
-            },
-            type: 'value'
+          yAxis: { // 直角坐标系 grid 中的 y 轴
+            axisLine:{show:false}, axisTick:{show:false}, type: 'value'
           },
           visualMap:this.visualMap,
           series: [{
-            data: this.yDate,
-            type: 'bar',
+            data: this.yDate, type: 'bar',
             barWidth:'10', //柱的宽度
             itemStyle:{ // 柱状体的样式
-              // normal:{
-              //   color:function(params){
-              //     var colorList = ['#BD1416','#E64B45','#FF8C72','#FF8C72','#FF8C72',
-              //       '#FF8C72','#FF8C72','#FF8C72','#FF8C72','#FF8C72']
-              //     return colorList[params.dataIndex]
-              //   }
-              // },
               emphasis:{ //悬停时的颜色
                 color:'#FFD664'
               }
             },
-
           }]
         }
         chartNoSymptom.setOption(option)
@@ -188,8 +159,9 @@ export default{
           this.$nextTick(() => {
             this.initChart()
           })
+      }).catch(err=> {
+        alert('接口或处理逻辑错误')
       })
-
     }
 }
 </script>

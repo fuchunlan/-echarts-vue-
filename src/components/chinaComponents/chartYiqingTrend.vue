@@ -57,6 +57,7 @@ export default {
 
   },
   methods:{
+    // 初始化折线图
     initChart2(){
       let chart2 = this.$echarts.init(this.$refs.chart2)
       // 监听屏幕变化自动缩放图表

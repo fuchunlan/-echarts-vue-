@@ -46,10 +46,10 @@ export default {
     }
   },
   mounted() {
+    // 连接接口并处理数据，进行页面渲染
     this.$axios.get('/nosymapi/automation/modules/list?modules=FAutoCountryWeekCompRank,FAutoContinentConfirmStatis,FAutoConfirmMillionRankList,FAutoHealDeadRateRankList')
     .then((res) => {
       let data = res.data.data
-
       this.confirmMill = data.FAutoConfirmMillionRankList.filter((item,index) => {
         if (index < 10) {
           return item
@@ -59,13 +59,10 @@ export default {
       this.weekCompRank = data.FAutoCountryWeekCompRank.reverse()
       this.healRate = data.FAutoHealDeadRateRankList.healHead.reverse()
       this.deadRate = data.FAutoHealDeadRateRankList.deadHead.reverse()
-      // console.log(this.deadRate)
-      this.handleData()
+      this.handleData() // 处理图表数据
       this.$nextTick(() => { // 将回调延长到下次dom更新循环之后执行
-        this.initChart6()
+        this.initChart6() // 初始化渲染表格
       })
-
-
     })
   },
   methods:{
@@ -193,8 +190,6 @@ export default {
       this.flag = id
       this.handleData()
       this.initChart6()
-
-
     }
   }
 }

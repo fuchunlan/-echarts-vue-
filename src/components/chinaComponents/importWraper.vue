@@ -1,5 +1,5 @@
 <template>
-  <div id="importWraper" lazy>
+  <div id="importWraper" lazy >
 <!-- 境外输入趋势-->
 <!--    <div id="importTrend"></div>-->
     <div id="chartImport" class="lineWrap">
@@ -18,6 +18,7 @@
         <div class="banner"></div>
         <h1>境外输入</h1>
         <h2>肺炎疫情实时播报</h2>
+        <h3 style="color: #fff;position: absolute;right: 1rem;top: 9rem">----Fcl</h3>
         <el-button class="back" @click="isShowMore = false">实时疫情地图</el-button>
         <el-card class="box-card">
           <div class="box-card-items">
@@ -87,14 +88,19 @@ export default {
       isShowMore:false,
       loading:true,
       sourceList:[],//来源数组
-      nodeList:[]
+      nodeList:[],
+
     }
   },
   mounted() {
     this.$axios.get('wyapi/wuhan/app/data/list-total?t=321633448525')
     .then(res => {
       this.listTotal = res.data.data
-      this.dataList = this.listTotal.chinaDayList
+      this.dataList = this.listTotal.chinaDayList.filter((item,index) => {
+        if (index < this.listTotal.chinaDayList.length -3){
+          return item
+        }
+      })
       this.$nextTick(() => {
         this.initImportChart()
       })
@@ -163,37 +169,19 @@ export default {
       }
       importChart.setOption(option,true)
     },
+    // 初始化桑基图
     initsourceChart() {
       let sourceChart = this.$echarts.init(this.$refs.sourceChart)
       window.addEventListener('resize',function (){
         sourceChart.resize()
       })
       let option = {
-        title: {
-          text: '境外输入确诊病例来源'
-        },
-        tooltip: {
-          trigger: 'item',
-          triggerOn: 'mousemove',
-        },
-
-        series: [
-          {
-            type: 'sankey',
-            data: this.nodeList,
-            links: this.sourceList,
-            focusNodeAdjacency: 'allEdges',
-            right:0,
-            itemStyle: {
-              borderWidth: 1,
-              borderColor: '#aaa'
-            },
-            lineStyle: {
-              color: 'source',
-              curveness: 0.5
-            }
-          }
-        ]
+        title: {text: '境外输入确诊病例来源'},
+        tooltip: {trigger: 'item', triggerOn: 'mousemove',},
+        series: [{type: 'sankey', data: this.nodeList, right:0,
+          links: this.sourceList, focusNodeAdjacency: 'allEdges',
+            itemStyle: {borderWidth: 1, borderColor: '#aaa'},
+            lineStyle: {color: 'source', curveness: 0.5}}]
       }
       sourceChart.setOption(option,true)
     },
@@ -211,6 +199,7 @@ export default {
           })
         })
     },
+    // 处理节点数据
     handleNode(){
       this.nodeList = []
       this.sourceList.forEach(item=> {
@@ -227,7 +216,6 @@ export default {
         node.push(newNode)
       })
       this.nodeList = node
-      // console.log(this.nodeList)
     }
 
   }
